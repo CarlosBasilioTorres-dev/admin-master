@@ -43,8 +43,14 @@ class Measures{
         })
     }
 
+    setPercentColors(element,color){
+        if(color){
+            element.style.backgroundColor = color;
+        }
+    }
+
     setPercentCircleOne(){
-        this.properties.values.forEach((value,index) => {
+        this.properties.values.forEach((value) => {
             var element = document.createElement('div');
             element.classList.add("card-container")
             element.setAttribute('data-value',value.value);
@@ -61,7 +67,7 @@ class Measures{
 
             var progress = document.createElement('div');
             progress.classList.add("progress");
-
+          
             var progress_bar = document.createElement('div')
             progress_bar.classList.add("progress-bar");
             progress_bar.style.height = "0%";
@@ -79,6 +85,10 @@ class Measures{
             element.appendChild(body);
             element.appendChild(card_concept);
             this.cardsContainer.appendChild(element);
+
+            this.setPercentColors(progress,value.progressColor);
+            this.setPercentColors(progress_bar,value.progressBarColor);
+            this.setPercentColors(card_concept,value.conceptColor);
         })
     }
 
