@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/admin-master.css">
-    <link rel="stylesheet" href="../css/demo.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/admin-master.css" />
+    <link rel="stylesheet" href="../css/demo.css" />
     <title>Admin Master | Cards</title>
-</head>
-<body>
-
-    <div class="measures">
-        <h1> My Measures </h1>
+  </head>
+  <body>
+    <div class="demo-char-container">
+      <div class="demo-container-header">
+        <h1>My Measures</h1>
         <div class="tools">
-            <div class="switch-button">
-                <div>Modo Obscuro</div>
-                <label for="dark-mode">
-                    <input type="checkbox" id="dark-mode">
-                </label>
-            </div>
+          <div class="switch-button">
+            <div>Modo Obscuro</div>
+            <label for="dark-mode">
+              <input type="checkbox" id="dark-mode" />
+            </label>
+          </div>
         </div>
+      </div>
+      <div class="measures"></div>
     </div>
-
     <script src="../js/demo.js"></script>
     <script src="../js/measures.js"></script>
     <script>
-        let measures = new Measures({
-                type : 'percent-circle-one',
-                container: '.measures',
-                values: [
-                    {
-                        value:40,
-                        concept:'concept 1',
-                        progressColor:'#ff0000',
-                        progressBarColor:'#0000ff',
-                        conceptColor:'#00ff00',
-                    },
-                         
-                    {
-                        value:60,
-                        concept:'concept 2'
-                    },
-                         
-                    {
-                        value:80,
-                        concept:'concept 3'
-                    },
-                         
-                    {
-                        value:100,
-                        concept:'concept 4'
-                    },
-                         
-                    {
-                        value:10,
-                        concept:'concept 5'
-                    }
-                ]
-            });
+      let measures = new Measures({
+        type: "percent-circle-one",
+        container: ".measures",
+        values: [
+          {
+            value: 40,
+            concept: "concept 1",
+            progressColor: "#ff0000",
+            progressBarColor: "#0000ff",
+            conceptColor: "#00ff00",
+          },
 
+          {
+            value: 60,
+            concept: "concept 2",
+          },
+
+          {
+            value: 80,
+            concept: "concept 3",
+          },
+
+          {
+            value: 100,
+            concept: "concept 4",
+          },
+
+          {
+            value: 10,
+            concept: "concept 5",
+          },
+        ],
+      });
     </script>
-</body>
+  </body>
 </html>

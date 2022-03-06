@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/demo.css" />
+    <link rel="stylesheet" href="../css/admin-master.css" />
+    <title>Admin Master | Pie Chart</title>
+  </head>
+  <body>
+    <div class="demo-char-container">
+      <div class="demo-container-header">
+        <div class="tools">
+          <div class="switch-button">
+            <div>Modo Obscuro</div>
+            <label for="dark-mode">
+              <input type="checkbox" id="dark-mode" />
+            </label>
+          </div>
+        </div>
+        <h1 style="margin-bottom: 20px">Gráficos</h1>
+      </div>
+      <div class="char-container"></div>
+    </div>
+    <script src="../js/demo.js"></script>
+    <script src="../js/charts.js"></script>
+    <script>
+      var chart = new MasterChart({
+        type: 1,
+        container: ".char-container",
+        datas: [
+          { data: 15, value: "facebook", color: "#3a5794" },
+          { data: 15, value: "twitter", color: "#00a6e8" },
+          { data: 35, value: "pinterest", color: "#bd0001" },
+          { data: 15, value: "slack", color: "#481449" },
+          { data: 12, value: "Github", color: "#1f1e1e" },
+          { data: 5, value: "Github", color: "#00a6e8" },
+          { data: 3, value: "pinterest", color: "#bd0001" },
+        ],
+        width: "450px",
+      });
+    </script>
+  </body>
+</html>
