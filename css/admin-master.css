@@ -226,6 +226,54 @@ svg {
   background-color: #1a1a1a;
 }
 
+/*velocimeter*/
+
+.velocimetro {
+  width: 250px;
+  height: 125px;
+  overflow: hidden;
+  position: relative;
+}
+
+.velocimetro .pie-chart {
+  top: 0px;
+  box-shadow: none;
+  position: absolute;
+}
+
+.velocimetro .labels {
+  z-index: 5;
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  align-items: center;
+  top: 0;
+  transform: rotateZ(2deg);
+}
+
+.velocimetro .measures-markers {
+  position: absolute;
+}
+
+.marker-container {
+  z-index: 5;
+  width: 450px;
+  height: 450px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  transform: rotateZ(0deg);
+  -webkit-transition: transform 1s ease;
+}
+
+.marker-container .marker {
+  border-bottom: 2px solid black;
+  z-index: 5;
+  width: 50%;
+}
 /*height options*/
 .h-1 {
   height: 200px;

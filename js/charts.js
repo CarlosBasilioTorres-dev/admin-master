@@ -18,7 +18,7 @@ class MasterChart {
 
     }
 
-    setStrokes(element) {
+    setStrokes(element, divider) {
 
         var counter = 100;
 
@@ -30,14 +30,15 @@ class MasterChart {
 
             counter -= this.properties.datas[index].data;
             element.style.stroke = this.properties.datas[index].color;
-            element.style.transform = "rotatez(" + (3.6 * counter) + "deg) scale(1)";
+            element.style.transform = "rotatez(" + ((3.6 * (counter / divider))) + "deg) scale(1)";
             setTimeout(() => {
-                element.style.strokeDashoffset = 3.15 * (100 - Number(this.properties.datas[index].data)) + "%";
+                element.style.strokeDashoffset = 3.15 * (100 - (Number(this.properties.datas[index].data) / divider)) + "%";
             })
         });
     }
 
-    createPieChart() {
+
+    createPieChart(divider) {
 
         var pie_chart = document.createElement("div");
 
@@ -47,7 +48,7 @@ class MasterChart {
 
         this.container.appendChild(pie_chart);
         this.setPieChartElements(pie_chart);
-        this.setStrokes(pie_chart)
+        this.setStrokes(pie_chart, divider)
     }
 
     validatePieDatas() {
@@ -75,11 +76,95 @@ class MasterChart {
         r_circle.style.transform = "rotateZ(269deg) scale(1)";
     }
 
+    pieChartCorrectionForVelocimeter() {
+        var element = document.querySelector(".pie-chart");
+        var velocimetro = document.querySelector(".velocimetro");
+
+        element.style.transform = "rotateZ(180deg) rotateY(180deg)";
+        velocimetro.style.width = this.properties.width;
+        velocimetro.style.height = (this.properties.width.replace("px", "") / 2) + "px";
+
+        document.querySelectorAll(".velocimetro .labels").forEach((label, index) => {
+            label.style.transform = "rotateZ(" + (18 * index) + "deg)";
+
+            if (index == 0) {
+                label.style.transform = "rotateZ(2deg)";
+            }
+
+            if (index == 10) {
+                label.style.transform = "rotateZ(178deg)";
+            }
+
+            if (index > 5) {
+                label.firstElementChild.style.transform = "rotateY(180deg) rotateX(180deg)";
+            }
+        })
+
+    }
+
+    addVelocimeterMeasures() {
+        for (var i = 0; i <= 10; i++) {
+            var label = document.createElement("div");
+            var masures_makers = document.createElement("div");
+
+            label.classList.add("labels")
+            label.style.width = this.properties.width;
+            label.style.height = this.properties.width;
+
+            masures_makers.classList.add("measures-makers")
+            masures_makers.textContent = (i * 10) + "%"
+
+            label.appendChild(masures_makers)
+
+            this.container.appendChild(label)
+        }
+    }
+
+    addMarker() {
+        var marker_container = document.createElement("div");
+        var marker = document.createElement("div");
+
+        marker_container.classList.add("marker-container")
+        marker.classList.add("marker");
+
+        marker_container.append(marker);
+        this.container.appendChild(marker_container);
+
+        marker.style.borderBottom = "2px solid " + this.properties.color[3];
+        marker_container.style.transform = "rotateZ(" + 1.8 * this.properties.value + "deg)"
+        if (!this.properties.color[3]) {
+            console.warn("No se ha condigurado color para indicador")
+        }
+
+    }
+
+    setColorsForVelocimeter() {
+        if (this.properties.color) {
+            this.properties.datas = [{
+                data: 75,
+                value: "cuota",
+                color: this.properties.color[0] || "green"
+            }, {
+                data: 15,
+                value: "cuota",
+                color: this.properties.color[1] || "yellow"
+            }, {
+                data: 10,
+                value: "cuota",
+                color: this.properties.color[2] || "red"
+            }]
+
+            return true
+        } else {
+            return false
+        }
+    }
+
     createChart() {
         switch (this.properties.type) {
             case 1:
                 if (this.validatePieDatas()) {
-                    this.createPieChart();
+                    this.createPieChart(1);
                 } else {
                     console.warn("La suma de elementos debe de ser igual a 100%")
                 }
@@ -93,11 +178,22 @@ class MasterChart {
                     color: this.properties.color
                 }]
 
-                this.createPieChart();
+                this.createPieChart(1);
                 this.percentCorrection();
                 this.createCenterCircle();
-                this.startintervals();
                 break;
+            case 3:
+                if (this.setColorsForVelocimeter()) {
+                    this.createPieChart(2);
+                    this.addVelocimeterMeasures();
+                    this.pieChartCorrectionForVelocimeter();
+                    this.addMarker()
+                } else {
+                    console.error("Por favor configura los colores que necesitas para tu grafica")
+                }
+
+                break;
+
         }
     }
 
